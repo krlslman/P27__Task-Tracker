@@ -1,38 +1,49 @@
-import { useState } from "react";
 import AddTaskForm from "./AddTaskForm";
+import { useState } from "react";
 
-const Header = ({tasks}) => {
+const Header = ({tasks, setTasks}) => {
   const [show, setShow] = useState(false);
+
   const [btnStyle, setBtnStyle] = useState({
-    name: 'SHOW ADD TASK BAR',
-    bgColor: 'purple',
+    name: "SHOW ADD TASK BAR",
+    bgColor: "purple",
   });
 
-  const handleShow = () => {
+  //! React, default olarak state'leri hemen degistirmeyebilir.
+  //! Ekstra render'lari azaltmak icin state'leri toplu (batch) bir sekilde gunceller.
+  //! Bir event handler icerisindeki ardasik state'ler event bitiminde toplu bir
+  //! sekilde guncellenmis olur.State'lerin guncelenmesi gelis sirasina gorere yapilir.
+  //! Ayni event icerisinde birbirine bagli state'leri kullanirken buna dikkat etmek gerkir.
 
-    if(show){
+  //? https://stackoverflow.com/questions/48563650/does-react-keep-the-order-for-state-updates
+  //? 📢 React doesn't update states instantly, it updates them in bulk. States are updated with async logic to avoid over-rendering
+  const handleShow = () => {
+    if (show) {
       setBtnStyle({
-        name: 'SHOW ADD TASK BAR',
-        bgColor: 'purple',
-      })
-    }else{
+        name: "SHOW ADD TASK BAR",
+        bgColor: "purple",
+      });
+    } else {
       setBtnStyle({
-        name: 'SHOW ADD TASK BAR',
-        bgColor: 'red',
-      })
+        name: "CLOSE ADD TASK BAR",
+        bgColor: "red",
+      });
     }
-    setShow(!show); 
-    // bunun burada yada en başta olması farketmez, react dom güncellemesini toplu yapıyor, satır satır değil.
-    console.log(show);
+    setShow(!show);
   };
-  //? Not: React state'leri anında güncellemiyor, toplu güncelleme yapıyor. 
+  console.log(show);
+
   return (
-    <header>
+    <header className="header">
       <h1>TASK TRACKER</h1>
-      <button onClick={handleShow} className="btn" style={{backgroundColor: btnStyle.bgColor}} >
+      <button
+        onClick={handleShow}
+        className="btn"
+        style={{ backgroundColor: btnStyle.bgColor }}
+      >
         {btnStyle.name}
       </button>
-      {show && <AddTaskForm />}  
+      {show && <AddTaskForm tasks={tasks} setTasks={setTasks}/>}
     </header>
   );
 };
