@@ -16,14 +16,14 @@ body {
   border: red solid 2px;
 }
 .container {
-  
+  width: 800px;
   background-image: linear-gradient(
     to bottom right,
     rgb(204, 16, 119),
     rgb(231, 191, 213)
   );
   margin: 3rem auto;
-  max-width: 600px;
+  /* max-width: 600px; */
   padding: 2rem;
   overflow: hidden;
   border-radius: 5px;
@@ -77,6 +77,30 @@ body {
   margin: 0.7rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
+}
+.display-tasks{
+  display: flex;
+  
+  flex-direction: row;
+}
+.task-row{
+  width: 90%;
+}
+.btn-trash{
+  /* text-align: center;
+  vertical-align: middle; */
+  display: flex;
+  justify-content:flex-end;
+  align-items: center;
+  /* width: 50px; */
+  
+  width: 10%;
+}
+.btn-trash:hover{
+  /* border: #dd98c3 solid 3px; */
+  border-radius: 50%;
+  padding-right: 15px;
+  color: aliceblue;
 }
 
 .done {

@@ -35,9 +35,10 @@ const AddTaskForm = ({ tasks, setTasks }) => {
             type="date"
             name="day"
             id="day"
-            value={day}
+            // placeholder={Date()}
+            value={Date()}
             onChange={(e) => setDay(e.target.value)}
-            required
+            // required
           />
         </div>
         <div>
